@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Weather Story App</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="canvas"></canvas>
+    <div id="ui-overlay">
+      <div id="narration-box" class="narration-box hidden">
+        <p id="narration-text"></p>
+        <button id="next-btn" class="next-button">Next</button>
+      </div>
+      <div id="dialogue-box" class="dialogue-box hidden">
+        <div id="dialogue-character" class="dialogue-character"></div>
+        <p id="dialogue-text"></p>
+      </div>
+      <div id="scene-title" class="scene-title hidden"></div>
+      <div id="game-ui" class="game-ui hidden"></div>
+      <button id="skip-btn" class="skip-button hidden">Skip</button>
+      <div id="progress-bar" class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "space-weather-story-app",
+  "version": "1.0.0",
+  "description": "Interactive 3D storytelling app for children about space weather",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["education", "space", "3d", "children", "interactive"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/three": "^0.180.0",
+    "three": "^0.180.0",
+    "vite": "^7.1.9"
+  }
+}
