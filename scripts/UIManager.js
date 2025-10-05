@@ -11,7 +11,11 @@ export class UIManager {
     this.gameUI = document.getElementById('game-ui');
     this.skipBtn = document.getElementById('skip-btn');
     this.progressFill = document.getElementById('progress-fill');
+    this.astronautNarrator = document.getElementById('astronaut-narrator');
+    this.astronautSpeech = document.getElementById('astronaut-speech');
+    this.sceneIndicator = document.getElementById('scene-indicator');
 
+    this.subtitlesEnabled = true;
     this.onNextCallback = null;
     this.setupButtons();
   }
@@ -92,6 +96,28 @@ export class UIManager {
 
   updateProgress(percentage) {
     this.progressFill.style.width = `${percentage}%`;
+  }
+
+  showAstronautNarrator(text, duration = 3000) {
+    this.astronautNarrator.classList.remove('hidden');
+    this.astronautSpeech.classList.remove('hidden');
+    this.astronautSpeech.textContent = text;
+
+    this.audioManager.speak(text);
+
+    if (duration > 0) {
+      setTimeout(() => {
+        this.hideAstronautNarrator();
+      }, duration);
+    }
+  }
+
+  hideAstronautNarrator() {
+    this.astronautSpeech.classList.add('hidden');
+  }
+
+  updateSceneIndicator(current, total) {
+    this.sceneIndicator.textContent = `Scene ${current}/${total}`;
   }
 
   createConfetti() {

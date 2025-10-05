@@ -190,12 +190,15 @@ export class Scene01 {
 
   startNarration() {
     this.manager.uiManager.showSceneTitle('Scene 1: Meet Sunny the Sun');
-    this.showNextNarration();
+    this.manager.uiManager.showAstronautNarrator("Hi kids! Did you know our Sun sometimes sneezes solar flares?", 4000);
+
+    setTimeout(() => {
+      this.showNextNarration();
+    }, 4500);
   }
 
   showNextNarration() {
     const narrations = [
-      "Hi kids! Did you know our Sun sometimes sneezes solar flares?",
       "Meet Sunny the Sun! Sunny is our friendly star who keeps us warm and bright.",
       "Watch as Sunny stretches and launches a little solar flare named Sparky!",
       "Tap on Sunny's rays to launch Sparky multiple times!"

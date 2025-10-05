@@ -6,17 +6,75 @@ import { UIManager } from './UIManager.js';
 class SpaceWeatherApp {
   constructor() {
     this.canvas = document.getElementById('canvas');
+    this.homeScreen = document.getElementById('home-screen');
+    this.uiOverlay = document.getElementById('ui-overlay');
+    this.settingsPanel = document.getElementById('settings-panel');
     this.currentSceneIndex = 0;
+    this.isPlaying = false;
 
     this.initThree();
     this.audioManager = new AudioManager();
     this.uiManager = new UIManager(this.audioManager);
     this.sceneManager = new SceneManager(this.scene, this.camera, this.renderer, this.audioManager, this.uiManager);
 
+    this.setupHomeScreen();
     this.setupEventListeners();
     this.animate();
+  }
 
-    this.sceneManager.loadScene(0);
+  setupHomeScreen() {
+    document.getElementById('play-btn').addEventListener('click', () => {
+      this.startStory();
+    });
+
+    document.getElementById('replay-btn').addEventListener('click', () => {
+      this.startStory();
+    });
+
+    document.getElementById('settings-btn').addEventListener('click', () => {
+      this.audioManager.playSound('click');
+      this.settingsPanel.classList.remove('hidden');
+    });
+
+    document.getElementById('close-settings').addEventListener('click', () => {
+      this.audioManager.playSound('click');
+      this.settingsPanel.classList.add('hidden');
+    });
+
+    document.getElementById('subtitles-toggle').addEventListener('change', (e) => {
+      this.uiManager.subtitlesEnabled = e.target.checked;
+    });
+
+    document.getElementById('narration-toggle').addEventListener('change', (e) => {
+      this.audioManager.enabled = e.target.checked;
+    });
+
+    document.getElementById('home-btn').addEventListener('click', () => {
+      this.returnHome();
+    });
+  }
+
+  startStory() {
+    this.audioManager.playSound('whoosh');
+    this.homeScreen.style.animation = 'fadeOut 0.5s ease-out forwards';
+
+    setTimeout(() => {
+      this.homeScreen.classList.add('hidden');
+      this.canvas.classList.remove('hidden');
+      this.uiOverlay.classList.remove('hidden');
+      this.isPlaying = true;
+      this.sceneManager.loadScene(0);
+    }, 500);
+  }
+
+  returnHome() {
+    this.audioManager.playSound('click');
+    this.sceneManager.cleanup();
+    this.canvas.classList.add('hidden');
+    this.uiOverlay.classList.add('hidden');
+    this.homeScreen.classList.remove('hidden');
+    this.homeScreen.style.animation = 'fadeIn 0.5s ease-out forwards';
+    this.isPlaying = false;
   }
 
   initThree() {

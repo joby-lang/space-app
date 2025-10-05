@@ -49,6 +49,20 @@ export class SceneManager {
 
     const progress = ((index + 1) / this.scenes.length) * 100;
     this.uiManager.updateProgress(progress);
+    this.uiManager.updateSceneIndicator(index + 1, this.scenes.length);
+    this.uiManager.astronautNarrator.classList.remove('hidden');
+  }
+
+  cleanup() {
+    if (this.currentScene) {
+      this.currentScene.cleanup();
+      this.currentScene = null;
+    }
+    this.uiManager.hideNarration();
+    this.uiManager.hideDialogue();
+    this.uiManager.hideGameUI();
+    this.uiManager.hideSceneTitle();
+    this.uiManager.hideAstronautNarrator();
   }
 
   nextScene() {
